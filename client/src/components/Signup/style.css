@@ -1,0 +1,19 @@
+.formBox {
+  border: 1px solid;
+  padding: 15px;
+}
+
+.submitButton {
+  margin-left: 100px;
+}
+
+.logoSegment {
+  margin-top: 5%;
+  margin-bottom: 0;
+  border: 1px solid;
+}
+
+.copyright {
+  margin-bottom: 0 !important;
+  font-size: .75rem;
+}

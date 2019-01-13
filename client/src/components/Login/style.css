@@ -1,0 +1,36 @@
+.formBox {
+  border: 1px solid;
+  padding: 15px;
+  padding-bottom: 3px;
+}
+
+.submitButton {
+  margin-left: 100px;
+}
+
+.logoSegment {
+  margin-top: 5%;
+  margin-bottom: 0;
+  border: 1px solid;
+}
+
+.inputWrapper {
+  padding-bottom: 30px !important;
+  margin-bottom: 3px !important;
+    /* padding-top: 30px !important; */
+}
+
+.signupText {
+  color: blue;
+  margin-top: 2px !important;
+  text-align: right;
+}
+
+.copyright {
+  margin-bottom: 0 !important;
+  font-size: .75rem;
+}
+
+.buttonBox {
+  padding-bottom: 30px !important;
+}
