@@ -9,6 +9,8 @@ module.exports = {
 //* Allow users to self register
 //************************************************************/
   signUp: (req, res) => {
+    console.log("body = " + JSON.stringify(req.body));
+
     const { body } = req;
     const {
       firstName,
@@ -16,6 +18,8 @@ module.exports = {
       password
     } = body;
     let { email } = body;
+
+
 
 
     if (!firstName) {
@@ -157,9 +161,12 @@ module.exports = {
           token: doc._id
         });
       });
+          // if (typeof window !== 'undefined') {
+            // } else {
+              // console.log("Unable to access local storage");
+            // };
     });
   },
-/* Haven't created the "store session token" capability yet - Don't forget
 
 
 
@@ -167,15 +174,17 @@ module.exports = {
 //* Verify validity of a user's token if presented 
 //************************************************************/
   verify: (req, res) => {
-    const { query } = req;
-    const { token } = query;
-
+    const { body } = req;
+    const { token } = body;
+    console.log(req);
+    console.log("Token = " + token);
 
     UserSession.find({
       _id: token,
       isDeleted: false
     }, (err, sessions) => {
       if (err) {
+        console.log("fail 1");
         return res.send({
           success: false,
           message: "ERROR:  Unable to obtain user token."
@@ -184,11 +193,13 @@ module.exports = {
 
 
       if (sessions.length != 1) {
+        console.log("Session length = " + sessions.length);
         return res.send({
           success: false,
           message: "ERROR:  Unable to verify session."
         });
       } else {
+        console.log("success 3");
         return res.send({
           success: true,
           message: "Successfully verified session token."

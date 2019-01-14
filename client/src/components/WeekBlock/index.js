@@ -2,7 +2,8 @@ import _ from 'lodash'
 import React from 'react'
 import './style.css';
 // import { Grid, Image } from 'semantic-ui-react'
-import { Button, Header, Grid, Icon, Label, Image, Menu, Segment, Sidebar, Container } from 'semantic-ui-react';
+// import { Button, Header, Grid, Icon, Label, Image, Menu, Segment, Sidebar, Container } from 'semantic-ui-react';
+import { Button, Grid, Icon, Label, Segment } from 'semantic-ui-react';
 
 
 export function WeekBlock() {

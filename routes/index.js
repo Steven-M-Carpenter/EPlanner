@@ -1,6 +1,7 @@
 const path = require("path");
 const router = require("express").Router();
 const booksController = require("../controllers/booksController");
+const loginController = require("../controllers/loginController");
 // const apiRoutes = require("./api");
 
 // API Routes
@@ -36,7 +37,7 @@ router
 // Matches with "/api/verify"
 router
   .route("/api/verify")
-  .get(loginController.verify);
+  .post(loginController.verify);
 
 
 // Matches with "/api/logout"

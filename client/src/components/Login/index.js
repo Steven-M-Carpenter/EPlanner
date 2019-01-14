@@ -1,26 +1,32 @@
 import React, { Component } from 'react';
 import API from "../../utils/API";
-import { Button, Header, Grid, Icon, Form, Image, Input, Label, Segment, Container } from 'semantic-ui-react';
+import { Button, Header, Grid, Icon, Form, Segment, } from 'semantic-ui-react';
+import './style.css';
 
 
 class Login extends Component {
-  state = { isLoggedIn: false };
+  state = {
+    isLoggedIn: false,
+  };
 
-  
+
   handleInputChange = event => {
     const value = event.target.value;
     const name = event.target.name;
     this.setState({
       [name]: value
     });
+    console.log("name = " + name);
+    console.log("value = " + value);
   };
 
   handleFormSubmit = event => {
     event.preventDefault();
     this.validateUser({
-      email: this.state.loginEmail, 
+      email: this.state.loginEmail,
       password: this.state.loginPassword
     });
+    console.log("state = " + JSON.stringify(this.state));
   };
 
 
@@ -41,7 +47,21 @@ class Login extends Component {
   validateUser = query => {
     API.getUser(query)
       .then(res => {
-        this.setState({ isLoggedIn: true })
+        console.log("LOGIN: res = " + JSON.stringify(res));
+        if (res.data.success) {
+          console.log("in success handle");
+          this.setState({ isLoggedIn: true, });
+          this.setState({ loginMsg: res.data.message });
+          window.localStorage.setItem("SMC_authkey", res.data.token);
+          window.location.assign('/authenticated/main');
+        } else {
+          console.log("in failure handle");
+          this.setState({ isLoggedIn: false });
+          this.setState({ loginMsg: res.data.message });
+          window.localStorage.setItem("SMC_authkey", "");
+          window.location.assign('/login');
+        }
+        console.log("LOGIN: state = " + JSON.stringify(this.state));
       })
       .catch(err => console.log(err));
   };
@@ -62,25 +82,27 @@ class Login extends Component {
                 </Header>
               </Segment>
               <Segment className="inputWrapper">
-              <Form.Field>
-                <label>Email Address</label>
-                <input 
-                  id="loginEmail" 
-                  onChange={this.handleInputChange} 
-                  placeholder='Email' />
-              </Form.Field>
-              <Form.Field>
-                <label>Password</label>
-                <input 
-                  id="loginPassword" 
-                  onChange={this.handleInputChange} 
-                  placeholder='Password' 
-                  type="password" />
-              </Form.Field>
+                <Form.Field>
+                  <label>Email Address</label>
+                  <input
+                    name="loginEmail"
+                    autoComplete="username"
+                    onChange={this.handleInputChange}
+                    placeholder='Email' />
+                </Form.Field>
+                <Form.Field>
+                  <label>Password</label>
+                  <input
+                    name="loginPassword"
+                    autoComplete="current-password"
+                    onChange={this.handleInputChange}
+                    placeholder='Password'
+                    type="password" />
+                </Form.Field>
               </Segment>
               {/* <Segment textAlign="right">Sign up now</Segment> */}
               <p className="signupText">Sign up now</p>
-              <Segment basic textAlign="center" className="buttonBox" onClick={this.handleFormSubmit} ><Button type='submit'>Login</Button></Segment>
+              <Segment basic textAlign="center" className="buttonBox"><Button type='submit' onClick={this.handleFormSubmit} >Login</Button></Segment>
               <p className="copyright">Copyright © 2019 - Steven M. Carpenter</p>
             </Form>
 
