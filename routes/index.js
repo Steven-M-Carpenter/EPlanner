@@ -4,24 +4,8 @@ const booksController = require("../controllers/booksController");
 const loginController = require("../controllers/loginController");
 // const apiRoutes = require("./api");
 
+
 // API Routes
-
-
-// Matches with "/api/books"
-// router
-//   .route("/api/books")
-//   .get(booksController.findAll)
-//   .post(booksController.create);
-
-
-// // Matches with "/api/books/:id"
-// router
-//   .route("/api/books/:id")
-//   .get(booksController.findById)
-//   .put(booksController.update)
-//   .delete(booksController.remove);
-
-
 // Matches with "/api/signup"
 router
   .route("/api/signup")
@@ -43,7 +27,7 @@ router
 // Matches with "/api/logout"
 router
   .route("/api/logout")
-  .get(loginController.logout);
+  .post(loginController.logout);
 
 
 // If no API routes are hit, send the React app

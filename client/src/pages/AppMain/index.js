@@ -3,13 +3,16 @@ import API from "../../utils/API";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import 'semantic-ui-css/semantic.min.css';
 import './style.css';
+
+
+import MainMenu from '../../components/MainMenu';
 // import NoMatch from "./pages/NoMatch";
 import WeekBlock from '../../components/WeekBlock';
 // import AppMain from './pages/AppMain';
 // import Logout from './components/Logout';
 // import TestWide from './components/TestWide';
 // import WeekBlock from '../components/WeekBlock';
-// import SidebarMenu from './components/SidebarMenu';
+import SidebarMenu from '../../components/Sidebar';
 
 // console.log("Set State = " + JSON.stringify(this.state));
 
@@ -17,7 +20,21 @@ import WeekBlock from '../../components/WeekBlock';
 class AppMain extends Component {
   state = {
     isLoggedIn: false,
+    activeItem: 'Dashboard',
+    sidebarVisible: true,
   };
+
+  handleSBToggle = () => {
+    if (this.state.sidebarVisible) {
+      this.setState({ sidebarVisible: false })
+    } else {
+      this.setState({ sidebarVisible: true })
+    };
+  };
+
+
+  handleSBShowClick = () => this.setState({ sidebarVisible: true })
+  handleSBHide = () => this.setState({ sidebarVisible: false })
 
   // constructor(props) {
   //   super(props);
@@ -56,42 +73,21 @@ class AppMain extends Component {
         .catch (err => console.log(err));
   }
 
-  handleLoginStatus = (passedStatus, passedEmail) => {
-    console.log("APP: Loginstatus and email = " + passedStatus + " " + passedEmail);
-    if (passedStatus) {
-      this.setState({ isLoggedIn: true, });
-      this.setState({ loginEmail: passedEmail });
-    } else {
-      this.setState({ isLoggedIn: false });
-      this.setState({ loginEmail: passedEmail });
-    };
-    console.log("APP: state = " + JSON.stringify(this.state));
+
+  handleMenuClick = () => {
+
   };
 
 
 
   render() {
-    // return (
-    //   <div className="App">
-    //     <Login
-    //       handleLoginStatus={this.handleLoginStatus}
-    //     />
-    //     <AppMain
-    //       isLoggedIn={this.state.isLoggedIn}
-    //       loginEmail={this.state.loginEmail}
-    //     />
-    //   </div >
-    // );
-
 
     return (
       <div>
-        <WeekBlock />
-        <h1>Logged In?  {this.state.isLoggedIn}</h1>
-        <h1>Email?  {this.state.loginEmail}</h1>
+        <MainMenu />
 
-        <h1>Logged In?  {this.props.isLoggedIn}</h1>
-        <h1>Email?  {this.props.loginEmail}</h1>
+        {/* <WeekBlock /> */}
+
       </div>
     );
   };

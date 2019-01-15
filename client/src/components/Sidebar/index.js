@@ -3,36 +3,42 @@ import './style.css';
 import { Button, Header, Grid, Icon, Image, Label, Menu, Segment, Sidebar, Container } from 'semantic-ui-react';
 
 
-class SidebarMenu extends Component {
-  render() {
-    return (
-      <div className="SidebarMenu">
+const SidebarMenu = (props) => (
+
+        <div className="SidebarMenu">
+        <h2>{props.visible}</h2>
+        <Sidebar.Pushable>
           <Sidebar
             as={Menu}
-            animation='push'
+            animation='overlay'
             icon='labeled'
             inverted
-            onHide={this.handleSidebarHide}
+            onHide={props.action}
             vertical
-            visible={true}
+            visible={props.visible}
             width='thin'
           >
             <Menu.Item as='a'>
               <Icon name='home' />
-              Home
+              Dashboard
               </Menu.Item>
             <Menu.Item as='a'>
               <Icon name='calendar' />
               Calendar
               </Menu.Item>
             <Menu.Item as='a'>
-              <Icon name='camera' />
-              Snapshot
+              <Icon name='columns' />
+              Task Board
               </Menu.Item>
           </Sidebar>
+          <Sidebar.Pusher>
+            <Segment basic>
+              <Header as='h3'>{props.visible}</Header>
+              {/* <Image src='https://react.semantic-ui.com/images/wireframe/paragraph.png' /> */}
+            </Segment>
+          </Sidebar.Pusher>
+        </Sidebar.Pushable>
       </div>
-
     );
-  };
-};
+
 export default SidebarMenu;

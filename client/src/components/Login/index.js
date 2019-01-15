@@ -30,20 +30,6 @@ class Login extends Component {
   };
 
 
-  // handleLoginEvent = event => {
-  //   event.preventDefault();
-  //   if (currentBook.id === bookDataId) {
-  //     API.saveBook({
-  //       key: saveKey,
-  //       title: saveTitle,
-  //       authors: saveAuthors,
-  //       description: saveDescription,
-  //       image: saveImage,
-  //       link: saveLink
-  //     })
-  // };
-
-
   validateUser = query => {
     API.getUser(query)
       .then(res => {

@@ -176,15 +176,15 @@ module.exports = {
   verify: (req, res) => {
     const { body } = req;
     const { token } = body;
-    console.log(req);
-    console.log("Token = " + token);
+    // console.log(req);
+    // console.log("Token = " + token);
 
     UserSession.find({
       _id: token,
       isDeleted: false
     }, (err, sessions) => {
       if (err) {
-        console.log("fail 1");
+        // console.log("fail 1");
         return res.send({
           success: false,
           message: "ERROR:  Unable to obtain user token."
@@ -193,13 +193,13 @@ module.exports = {
 
 
       if (sessions.length != 1) {
-        console.log("Session length = " + sessions.length);
+        // console.log("Session length = " + sessions.length);
         return res.send({
           success: false,
           message: "ERROR:  Unable to verify session."
         });
       } else {
-        console.log("success 3");
+        // console.log("success 3");
         return res.send({
           success: true,
           message: "Successfully verified session token."
