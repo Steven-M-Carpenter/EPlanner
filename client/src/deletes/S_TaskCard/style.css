@@ -1,0 +1,100 @@
+/* body {
+  overflow-x: scroll;
+} */
+
+/* .TestWideContainer {
+  width: 5000px;
+} */
+
+
+/* .TestWideGrid {
+  width: 5000px;
+} */
+
+
+/* .TestWideRow {
+  width: 3000px;
+} */
+
+
+/* .TestWideRow {
+  margin-left: 15%;
+} */
+
+/* .titleBlock {
+  margin-top: 10px !important;
+  margin-bottom: 10px !important;
+  margin-left: 5px !important;
+  margin-right: 5px !important;
+}; */
+/* .card_Block_Header {
+  background-color: #CED0CE !important;
+} */
+
+.card_Block_Header {
+  background-color: #9FB8AD !important;
+};
+
+/* 
+.ui.card{
+  margin-top: 15px !important;
+  margin-bottom: 15px !important;
+  margin-left: 10px !important;
+  margin-right: 10px !important;
+}; */
+
+.card_Body_Unit{
+  /* margin-top: 15px !important; */
+  /* margin-bottom: 15px !important; */
+  /* margin-left: 10px !important; */
+  margin-right: 5px !important;
+};
+
+.ui.card {
+  width: 500px;
+  margin-right: 5px !important;
+};
+
+/* .ui.card, .card_Body_Unit {
+  margin-right: 5px !important;
+}; */
+/* .card_content_body {
+  background-color: red !important;
+}; */
+
+/* .task_Card_Div {
+  margin-bottom: 10px;
+}; */
+
+
+.directColumnL {
+  padding-left: 0;
+  padding-right: 0;
+};
+
+
+.directColumnR {
+  padding-left: 0;
+  padding-right: 0;
+  float: right;
+};
+
+
+.directIconL {
+  padding: 0;
+  padding-left: 0;
+  padding-right: 0;
+};
+
+
+.directIconR {
+  padding: 0;
+  padding-left: 0;
+  padding-right: 0;
+  text-align: right !important;
+};
+
+.userText {
+  color: black !important;
+};
+

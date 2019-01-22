@@ -1,10 +1,13 @@
 import React, { Component } from 'react';
-import './style.css';
 import API from "../../utils/API";
-import { Button, Header, Grid, Icon, Form, Image, Input, Label, Segment, Container } from 'semantic-ui-react';
+import './style.css';
+import { Button, Form, Input, FormGroup, Container, Row, Col, Label } from 'reactstrap';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-
-class Signup extends Component {
+class Login extends Component {
+  state = {
+    isLoggedIn: false,
+  };
 
 
   handleInputChange = event => {
@@ -21,13 +24,14 @@ class Signup extends Component {
   handleFormSubmit = event => {
     event.preventDefault();
     this.createUser({
-      firstName: this.state.firstName,
-      lastName: this.state.lastName,
+      firstName: this.state.fName,
+      lastName: this.state.lName,
       email: this.state.email,
       password: this.state.password
     });
     console.log("state = " + JSON.stringify(this.state));
   };
+
 
   createUser = query => {
     console.log("query = " + JSON.stringify(query));
@@ -54,46 +58,54 @@ class Signup extends Component {
       .catch(err => console.log(err));
   };
 
-
   render() {
     return (
-      <div className="SignupMain">
-        <Grid centered>
-          <Grid.Column width={6}>
 
-            <Form className="formBox">
-            <Segment basic textAlign="center" className="logoSegment" >
-            <Header as='h2' icon>
-              <Icon name='settings' />
-              Event Planner
-              <Header.Subheader>Manage your activities and deliver for clients.</Header.Subheader>
-            </Header>
-            </Segment>
-              <Form.Field>
-                <label>First Name</label>
-                <input name='firstName' onChange={this.handleInputChange} placeholder='First Name' />
-              </Form.Field>
-              <Form.Field>
-                <label>Last Name</label>
-                <input name='lastName' onChange={this.handleInputChange} placeholder='Last Name' />
-              </Form.Field>
-              <Form.Field>
-                <label>Email Address</label>
-                <input name='email' onChange={this.handleInputChange} placeholder='Email' />
-              </Form.Field>
-              <Form.Field>
-                <label>Password</label>
-                <input name='password' onChange={this.handleInputChange} placeholder='Password' type="password" />
-              </Form.Field>
-              <Segment basic textAlign="center"><Button type='submit' onClick={this.handleFormSubmit} >Submit</Button></Segment>
-              <p className="copyright">Copyright © 2019 - Steven M. Carpenter</p>
-            </Form>
+      <div className="login_Main">
+        <Container>
+          <Row className="top_Filler">
+          </Row>
+        </Container>
 
-          </Grid.Column>
-        </Grid >
-      </div >
+        <Container className="welcome_Box">
+          <Row>
+            {/* <Col className="d-flex justify-content-center py-3" sm="12"> */}
+            <Col className="text-center py-3" sm="12">
+              <FontAwesomeIcon className="icon_Traits mt-4" icon="cogs" size="6x" />
+              <p className="product_Title mb-1">Eventāgeous</p>
+              <p className="product_Slogan pb-4">Manage your activities - Deliver for your clients</p>
+            </Col>
+          </Row>
+
+          <Row className="pb-5">
+            <Col className="access_LoginCol" sm={{ size: 4, offset: 4 }}>
+              <Form>
+                <FormGroup className="mt-4">
+                  <Label className="label_Text mb-0" for="login_fName">First name</Label>
+                  <Input type="text" name="fName" id="login_fName" placeholder="Enter your first name" onChange={this.handleInputChange} />
+                </FormGroup>
+                <FormGroup className="mt-4">
+                  <Label className="label_Text mb-0" for="login_lName">Last name</Label>
+                  <Input type="text" name="lName" id="login_lName" placeholder="Enter your last name" onChange={this.handleInputChange} />
+                </FormGroup>
+                <FormGroup className="mt-4">
+                  <Label className="label_Text mb-0" for="login_email">Email</Label>
+                  <Input type="email" name="email" id="login_email" placeholder="Enter your email address" onChange={this.handleInputChange} />
+                </FormGroup>
+                <FormGroup className="mt-4">
+                  <Label className="label_Text mb-0" for="login_Password">Password</Label>
+                  <Input type="password" name="password" id="login_Password" placeholder="Enter a password" onChange={this.handleInputChange} />
+                </FormGroup>
+                <div className="text-center">
+                <Button className="submit_Button mt-3 mb-4" onClick={this.handleFormSubmit} >Submit</Button>
+                </div>
+              </Form>
+            </Col>
+          </Row>
+        </Container>
+      </div>
     );
   }
 }
 
-export default Signup;
+export default Login;

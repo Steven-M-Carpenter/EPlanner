@@ -1,38 +1,50 @@
 import React, { Component } from 'react';
+// import API from "../../utils/API";
 import './style.css';
-import { Button, Header, Grid, Icon, Form, Image, Input, Label, Segment, Container } from 'semantic-ui-react';
+import { Button, Container, Row, Col } from 'reactstrap';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 
-class Login extends Component {
+class Logout extends Component {
   state = { isLoggedIn: false };
+
+  handleExit = event => {
+    event.preventDefault();
+    console.log("Back to Root");
+    window.location.assign('/');
+  };
 
 
   render() {
-
     return (
-      <div className="LoginMain">
-        <Grid centered>
-          <Grid.Column width={6}>
+      <div className="login_Main">
+        <Container>
+          <Row className="top_Filler">
+          </Row>
+        </Container>
 
-            <Form className="formBox">
-              <Segment basic textAlign="center" className="logoSegment" >
-                <Header as='h2' icon>
-                  <Icon name='settings' />
-                  Event Planner
-                  <Header.Subheader>Manage your activities and deliver for clients.</Header.Subheader>
-                </Header>
-              </Segment>
-              <Segment textAlign="center" className="messageWrapper">
-                <Header as='h1' color='red'>Logout Complete</Header>
-              </Segment>
-              <p className="copyright">Copyright © 2019 - Steven M. Carpenter</p>
-            </Form>
+        <Container className="welcome_Box">
+          <Row>
+            <Col className="text-center py-3" sm="12">
+              <FontAwesomeIcon className="icon_Traits mt-4" icon="cogs" size="6x" />
+              <p className="product_Title mb-1">Eventāgeous</p>
+              <p className="product_Slogan pb-4">Manage your activities - Deliver for your clients</p>
+            </Col>
+          </Row>
 
-          </Grid.Column>
-        </Grid >
+          <Row className="pb-5">
+            <Col className="access_LoginCol" sm={{ size: 4, offset: 4 }}>
+              <p className="logout_Message text-center">Logout Complete</p>
+                <div className="text-center">
+                  <Button className="access_Button mt-3 mb-4" onClick={this.handleExit} >Exit</Button>
+                </div>
+            </Col>
+          </Row>
+          {/* <p className="copyright mb-1">Copyright © 2019 - Steven M. Carpenter</p> */}
+        </Container>
       </div >
     );
   }
 }
 
-export default Login;
+export default Logout;

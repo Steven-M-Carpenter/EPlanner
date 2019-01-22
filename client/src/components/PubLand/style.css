@@ -1,4 +1,49 @@
+.top_Filler {
+  /* background-color: yellow; */
+  min-height: 80px;
+  vertical-align: middle
+}
 
-.placeholderBox {
-  margin-top: 5% !important;
+.product_Title {
+  color: #0000b3;
+  /* color: #587B7F; */
+  font-size: 36px;
+  font-weight: 400;
+}
+
+.product_Slogan {
+  color: #0000b3;
+  /* color: #587B7F; */
+  font-size: 20px;
+  font-weight: 400;
+}
+
+.access_LoginCol {
+  background-color: #e6f7ff;
+  border-right: 1px solid #CED0CE;
+}
+
+.access_SignupCol {
+  border-left: 1px solid #CED0CE;
+  background-color: #e6f7ff;
+}
+
+.account_Labels {
+  /* color: #587B7F; */
+  font-size: 20px;
+  font-weight: 400; 
+}
+
+.welcome_Box {
+/* background-color: #CED0CE */
+border: 1px solid lightgrey;
+}
+
+.icon_Traits {
+  color: #0000b3;
+}
+
+.access_Button {
+  /* color: #e6f7ff !important; */
+  background-color: #0000b3 !important;
 }

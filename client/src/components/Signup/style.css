@@ -1,19 +1,30 @@
-.formBox {
-  border: 1px solid;
-  padding: 15px;
+.top_Filler {
+  /* background-color: yellow; */
+  min-height: 80px;
+  vertical-align: middle
 }
 
-.submitButton {
-  margin-left: 100px;
+.product_Title {
+  color: #0000b3;
+  /* color: #587B7F; */
+  font-size: 36px;
+  font-weight: 400;
 }
 
-.logoSegment {
-  margin-top: 5%;
-  margin-bottom: 0;
-  border: 1px solid;
+.product_Slogan {
+  color: #0000b3;
+  /* color: #587B7F; */
+  font-size: 20px;
+  font-weight: 400;
 }
 
-.copyright {
-  margin-bottom: 0 !important;
-  font-size: .75rem;
+.label_Text {
+  color: #0000b3;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.submit_Button {
+  /* color: #e6f7ff !important; */
+  background-color: #0000b3 !important;
 }

@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
-import API from "../../utils/API";
-import { Button, Divider, Header, Grid, Icon, Segment, } from 'semantic-ui-react';
+// import API from "../../utils/API";
 import './style.css';
+import { Button, Container, Row, Col } from 'reactstrap';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 
 
@@ -21,52 +22,43 @@ class PubLand extends Component {
     window.location.assign('/signup');
   };
 
+
+  // function PubLand(props) {
   render() {
     return (
-      <Grid textAlign='center'>
-        <Grid.Row>
-          <Grid.Column width={8}>
-            <Segment basic className="placeholderBox">
-              <Header as='h2' icon>
-                <Icon name='settings' />
-                Event Planner
-                <Header.Subheader>Manage your activities and deliver for clients.</Header.Subheader>
-              </Header>
-              <Segment placeholder className="placeholderBox2">
-                <Grid textAlign='center' >
-                  <Divider vertical>Or</Divider>
-                  <Grid.Row verticalAlign='middle'>
-                    <Grid.Column width={8}>
-                      <Header icon>
-                        <Icon name='search' />
-                        Access Your Account
-                  </Header>
-                      <Button
-                        primary
-                        content="Login"
-                        onClick={this.handleLogin}
-                      />
-                    </Grid.Column>
-                    <Grid.Column width={8}>
-                      <Header icon>
-                        <Icon name='world' />
-                        Create An Account
-                    </Header>
-                      <Button
-                        primary
-                        content="Sign-up"
-                        onClick={this.handleSignup}
-                      />
-                    </Grid.Column>
-                  </Grid.Row>
-                </Grid >
-              </Segment>
-            </Segment>
-          </Grid.Column>
-        </Grid.Row >
-      </Grid >
+
+      <div>
+        <Container>
+          <Row className="top_Filler">
+          </Row>
+        </Container>
+
+        <Container className="welcome_Box">
+          <Row>
+            {/* <Col className="d-flex justify-content-center py-3" sm="12"> */}
+            <Col className="text-center py-3" sm="12">
+              <FontAwesomeIcon className="icon_Traits mt-4" icon="cogs" size="6x" />
+              <p className="product_Title mb-1">Eventāgeous</p>
+              <p className="product_Slogan pb-3">Manage your activities - Deliver for your clients</p>
+            </Col>
+          </Row>
+
+          <Row className="pb-5">
+            <Col className="access_LoginCol text-center" sm={{ size: 4, offset: 2 }}>
+              <FontAwesomeIcon className="icon_Traits mt-5" icon="user" size="5x" />
+              <p className="account_Labels pt-4 pb-3">Access Your Account</p>
+              <Button className="access_Button mb-4" onClick={this.handleLogin}>Login</Button>
+            </Col>
+            <Col className="access_LoginCol text-center" sm="4">
+              <FontAwesomeIcon className="icon_Traits mt-5" icon="plus-circle" size="5x" />
+              <p className="account_Labels pt-4 pb-3">Create An Account</p>
+              <Button className="access_Button mb-4" onClick={this.handleSignup} >Sign-up</Button>
+            </Col>
+          </Row>
+        </Container>
+      </div >
     );
   };
 };
 
-  export default PubLand;
+export default PubLand;

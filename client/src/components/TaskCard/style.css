@@ -1,0 +1,14 @@
+.card_Main {
+/* border: 2px solid #0000b3 !important; */
+border-top: 3px solid #0000b3 !important;
+border-bottom: 1px solid #0000b3 !important;
+}
+
+.card_Header {
+  /* font-weight: bold; */
+  background-color: #e6f7ff !important; 
+}
+
+.card_Footer {
+  background-color: #e6f7ff !important; 
+}

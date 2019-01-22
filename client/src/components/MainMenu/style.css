@@ -1,0 +1,23 @@
+.navbar_Main {
+  background-color: #0000b3;
+}
+
+.app_Title:hover {
+  color: #e6f7ff;
+}
+
+.nav_Option {
+  color: #e6f7ff;
+}
+
+.nav_Option:hover {
+  color: white;
+  background-color: #0000f9;
+}
+
+.app_Title {
+  font-size: 24px !important;
+  font-weight: 700;
+  color: white;
+}
+

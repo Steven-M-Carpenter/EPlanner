@@ -1,18 +1,16 @@
 import React, { Component } from 'react';
 import API from "../../utils/API";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import 'semantic-ui-css/semantic.min.css';
 import './style.css';
-
-
 import MainMenu from '../../components/MainMenu';
+// import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+// import 'semantic-ui-css/semantic.min.css';
 // import NoMatch from "./pages/NoMatch";
-import WeekBlock from '../../components/WeekBlock';
+// import WeekBlock from '../../components/WeekBlock';
 // import AppMain from './pages/AppMain';
 // import Logout from './components/Logout';
 // import TestWide from './components/TestWide';
 // import WeekBlock from '../components/WeekBlock';
-import SidebarMenu from '../../components/Sidebar';
+// import SidebarMenu from '../../components/Sidebar';
 
 // console.log("Set State = " + JSON.stringify(this.state));
 
@@ -54,18 +52,13 @@ class AppMain extends Component {
     };
     API.checkAuth(query)
       .then(res => {
-        // console.log("AUTH: res = " + JSON.stringify(res));
         if (res.data.success) {
           console.log("in success handle");
           this.setState({ isLoggedIn: true, });
-          // this.setState({ loginMsg: res.data.message });
-          // window.localStorage.setItem("SMC_authkey", res.data.token);
-          // window.location.assign('/authenticated/main');
+          // window.location.assign('/auth/main');
         } else {
           console.log("in failure handle");
           this.setState({ isLoggedIn: false });
-          // this.setState({ loginMsg: res.data.message });
-          // window.localStorage.setItem("SMC_authkey", "");
           window.location.assign('/login');
           console.log("ERROR:  Would redirect to login.")
         };
@@ -85,9 +78,6 @@ class AppMain extends Component {
     return (
       <div>
         <MainMenu />
-
-        {/* <WeekBlock /> */}
-
       </div>
     );
   };

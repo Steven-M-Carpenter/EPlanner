@@ -1,6 +1,6 @@
 const path = require("path");
 const router = require("express").Router();
-const booksController = require("../controllers/booksController");
+const calendarController = require("../controllers/calendarController");
 const loginController = require("../controllers/loginController");
 // const apiRoutes = require("./api");
 
@@ -30,8 +30,20 @@ router
   .post(loginController.logout);
 
 
-// If no API routes are hit, send the React app
-router.use(function(req, res) {
+// Matches with "/api/addEvent"
+router
+  .route("/api/addEvent")
+  .post(calendarController.addEvent);
+
+
+// Matches with "/loadEvents"
+router
+  .route("/loadEvents")
+  .get(calendarController.loadEvents);
+
+
+  // If no API routes are hit, send the React app
+router.use(function (req, res) {
   res.sendFile(path.join(__dirname, "../client/build/index.html"));
 });
 

@@ -1,0 +1,57 @@
+.taskboard_Main {
+  background-color: white !important;
+}
+
+.col_Lane {
+  /* background-color: red !important; */
+  color: #0000b3;
+  font-weight: 600;
+}
+
+.col_Box {
+  border: 1px solid #0000b3 !important;
+  background-color: white !important;
+
+}
+
+.lane_Title {
+  font-size: 34px;
+  font-weight: 600;
+  color: #0000b3;
+}
+
+.col_Lane {
+  font-size: 24px;
+}
+
+.bc_Block {
+  height: 100vh;
+}
+
+.big_Cal_Comp {
+  height: 100vh;
+}
+
+/* .newEvent_Modal {
+  border-left: 1px solid #0000b3 !important;
+  border-right: 1px solid #0000b3 !important;
+  border-top: 3px solid #0000b3;
+  border-bottom: 1px solid #0000b3;
+} */
+
+.label_Text {
+  color: #0000b3;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.newEvent_MHeader {
+  color: #0000b3;
+  font-size: 24px;
+  font-weight: 700;
+  padding-left: 10px;
+}
+
+.process_Button {
+  background-color: #0000b3 !important;
+}

@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import API from "../../utils/API";
-import { Button, Header, Grid, Icon, Form, Segment, } from 'semantic-ui-react';
 import './style.css';
-
+import { Button, Form, Input, FormGroup, Container, Row, Col, Label } from 'reactstrap';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 class Login extends Component {
   state = {
@@ -23,8 +23,8 @@ class Login extends Component {
   handleFormSubmit = event => {
     event.preventDefault();
     this.validateUser({
-      email: this.state.loginEmail,
-      password: this.state.loginPassword
+      email: this.state.email,
+      password: this.state.password
     });
     console.log("state = " + JSON.stringify(this.state));
   };
@@ -39,7 +39,7 @@ class Login extends Component {
           this.setState({ isLoggedIn: true, });
           this.setState({ loginMsg: res.data.message });
           window.localStorage.setItem("SMC_authkey", res.data.token);
-          window.location.assign('/authenticated/main');
+          window.location.assign('/auth/main');
         } else {
           console.log("in failure handle");
           this.setState({ isLoggedIn: false });
@@ -53,48 +53,44 @@ class Login extends Component {
   };
 
   render() {
-
     return (
-      <div className="LoginMain">
-        <Grid centered>
-          <Grid.Column width={6}>
 
-            <Form className="formBox">
-              <Segment basic textAlign="center" className="logoSegment" >
-                <Header as='h2' icon>
-                  <Icon name='settings' />
-                  Event Planner
-                  <Header.Subheader>Manage your activities and deliver for clients.</Header.Subheader>
-                </Header>
-              </Segment>
-              <Segment className="inputWrapper">
-                <Form.Field>
-                  <label>Email Address</label>
-                  <input
-                    name="loginEmail"
-                    autoComplete="username"
-                    onChange={this.handleInputChange}
-                    placeholder='Email' />
-                </Form.Field>
-                <Form.Field>
-                  <label>Password</label>
-                  <input
-                    name="loginPassword"
-                    autoComplete="current-password"
-                    onChange={this.handleInputChange}
-                    placeholder='Password'
-                    type="password" />
-                </Form.Field>
-              </Segment>
-              {/* <Segment textAlign="right">Sign up now</Segment> */}
-              <p className="signupText">Sign up now</p>
-              <Segment basic textAlign="center" className="buttonBox"><Button type='submit' onClick={this.handleFormSubmit} >Login</Button></Segment>
-              <p className="copyright">Copyright © 2019 - Steven M. Carpenter</p>
-            </Form>
+      <div className="login_Main">
+        <Container>
+          <Row className="top_Filler">
+          </Row>
+        </Container>
 
-          </Grid.Column>
-        </Grid >
-      </div >
+        <Container className="welcome_Box">
+          <Row>
+            <Col className="text-center py-3" sm="12">
+              <FontAwesomeIcon className="icon_Traits mt-4" icon="cogs" size="6x" />
+              <p className="product_Title mb-1">Eventāgeous</p>
+              <p className="product_Slogan pb-4">Manage your activities - Deliver for your clients</p>
+            </Col>
+          </Row>
+
+          <Row className="pb-5">
+            <Col className="access_LoginCol" sm={{ size: 4, offset: 4 }}>
+              <Form className="access_Form">
+                <FormGroup className="mt-4">
+                  <Label className="label_Text mb-0" for="login_email">Email</Label>
+                  <Input type="email" name="email" id="login_email" placeholder="Enter your email address" onChange={this.handleInputChange} />
+                </FormGroup>
+                <FormGroup className="mt-4">
+                  <Label className="label_Text mb-0" for="login_Password">Password</Label>
+                  <Input type="password" name="password" id="login_Password" placeholder="Enter your password" onChange={this.handleInputChange} />
+                </FormGroup>
+                <div className="text-center">
+                  <Button className="access_Button mt-3 mb-4" onClick={this.handleFormSubmit} >Submit</Button>
+                </div>
+              </Form>
+            </Col>
+          </Row>
+          {/* <p className="copyright mb-1">Copyright © 2019 - Steven M. Carpenter</p> */}
+        </Container>
+      </div>
+
     );
   }
 }

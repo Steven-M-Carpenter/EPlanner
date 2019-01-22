@@ -13,6 +13,12 @@ export default {
     console.log("Quer in API = " + JSON.stringify(query));
     return axios.post("/api/verify", query);
   },
+  loadEvents: () => {
+    return axios.get("/loadEvents");
+  },
+  createEvent: (query) => {
+    return axios.post("/api/addEvent", query);
+  },
   // Deletes a book from the database
   deleteBook: function(id) {
     console.log("Delete of ID requested: " + id);

@@ -95,6 +95,7 @@ module.exports = {
 //* Process user Sign-in and create auth token for them
 //************************************************************/
   signIn: (req, res) => {
+    console.log("body = " + JSON.stringify(req.body));
     const { body } = req;
     const { password } = body;
     let { email } = body;

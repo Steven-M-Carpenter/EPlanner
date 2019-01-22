@@ -1,37 +1,37 @@
-
-.formBox {
-  border: 1px solid;
-  padding: 15px;
-  padding-bottom: 3px;
+.top_Filler {
+  /* background-color: yellow; */
+  min-height: 80px;
+  vertical-align: middle
 }
 
-.submitButton {
-  margin-left: 100px;
+.product_Title {
+  color: #0000b3;
+  /* color: #587B7F; */
+  font-size: 36px;
+  font-weight: 400;
 }
 
-.logoSegment {
-  margin-top: 5%;
-  margin-bottom: 0;
-  border: 1px solid;
+.product_Slogan {
+  color: #0000b3;
+  /* color: #587B7F; */
+  font-size: 20px;
+  font-weight: 400;
 }
 
-.inputWrapper {
-  padding-bottom: 30px !important;
-  margin-bottom: 3px !important;
-    /* padding-top: 30px !important; */
+.access_LoginCol {
+  border-left: 1px solid #0000b3 !important;
+  border-right: 1px solid #0000b3 !important;
+  border-top: 3px solid #0000b3;
+  border-bottom: 1px solid #0000b3;
 }
 
-.signupText {
-  color: blue;
-  margin-top: 2px !important;
-  text-align: right;
+.label_Text {
+  color: #0000b3;
+  font-size: 12px;
+  font-weight: 700;
 }
 
-.copyright {
-  margin-bottom: 0 !important;
-  font-size: .75rem;
-}
-
-.buttonBox {
-  padding-bottom: 30px !important;
+.access_Button {
+  /* color: #e6f7ff !important; */
+  background-color: #0000b3 !important;
 }
