@@ -38,6 +38,9 @@
   border-top: 3px solid #0000b3;
   border-bottom: 1px solid #0000b3;
 } */
+.col_Button {
+  border-bottom: 1px solid #e9ecef;
+}
 
 .label_Text {
   color: #0000b3;
@@ -52,6 +55,26 @@
   padding-left: 10px;
 }
 
+.editEvent_MHeader {
+  color: #0000b3;
+  font-size: 24px;
+  font-weight: 700;
+  padding-left: 10px;
+}
+
 .process_Button {
+  background-color: #0000b3 !important;
+}
+
+.delete_Event {
+  float: right;
+  color: #0000b3 !important;
+  border-color: #0000b3 !important;
+}
+
+.delete_Event:hover {
+  float: right;
+  color: white !important;
+  /* background-color: red !important; */
   background-color: #0000b3 !important;
 }

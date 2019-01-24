@@ -1,6 +1,7 @@
 const path = require("path");
 const router = require("express").Router();
 const calendarController = require("../controllers/calendarController");
+const taskController = require("../controllers/taskController");
 const loginController = require("../controllers/loginController");
 // const apiRoutes = require("./api");
 
@@ -40,6 +41,24 @@ router
 router
   .route("/loadEvents")
   .get(calendarController.loadEvents);
+
+
+// Matches with "/api/chgDate"
+router
+  .route("/api/chgEvent")
+  .post(calendarController.chgEvent);
+
+
+// Matches with "/api/deleteEvent"
+router
+.route("/api/deleteEvent")
+.post(calendarController.deleteEvent);
+
+
+// Matches with "/api/deleteEvent"
+router
+.route("/api/addCard")
+.post(taskController.addCard);
 
 
   // If no API routes are hit, send the React app

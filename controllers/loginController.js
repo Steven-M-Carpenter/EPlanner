@@ -119,7 +119,7 @@ module.exports = {
 
     User.find({
       email: email
-    }, (err, users) => {
+      }, (err, users) => {
       console.log("Found user = " + users);
       if (err) {
         return res.send({
@@ -133,7 +133,6 @@ module.exports = {
           message: 'ERROR:  Unable to process login.'
         });
       };
-
 
       const user = users[0];
       console.log("password supplied = " + password);

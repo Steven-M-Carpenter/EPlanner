@@ -72,48 +72,92 @@ module.exports = {
   //************************************************************/
   //* Modify events as directed
   //************************************************************/
-  update: (req, res) => {
+  chgEvent: (req, res) => {
+    console.log("Request Body = " + JSON.stringify(req.body));
     db.Event
-      .findOneAndUpdate({ _id: req.params.id }, req.body)
+      // .findOneAndUpdate({ _id: req.body.id, isDeleted: false }, req.body)
+      .findOneAndUpdate({ _id: req.body.id, isDeleted: false }, 
+      // .findByIdAndUpdate({ _id: req.body.id },
+        {
+          $set: {
+            title: req.body.title,
+            start: req.body.start,
+            end: req.body.end
+          }
+        }, null,
+        (err, event) => {
+          if (err) {
+            return res.send({
+              success: false,
+              message: "ERROR:  Unable to alter the requested record."
+            });
+          } 
+        }
+      )
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
   },
 
+  //   Event.findOneAndUpdate({ _id: eventID, isDeleted: false }, { $set: { isDeleted: true }}, null, 
 
   //************************************************************/
   //* Delete events when prompted to do so
   //************************************************************/
-  removeEvent: (req, res) => {
+  deleteEvent: (req, res) => {
+    console.log("Request Body = " + JSON.stringify(req.body));
     db.Event
-      .findById({ _id: req.params.id })
-      .then(dbModel => dbModel.remove())
-      .then(dbModel => res.json(dbModel))
-      .catch(err => res.status(422).json(err));
+    // .findOneAndUpdate({ _id: req.body.id, isDeleted: false }, req.body)
+    .findOneAndUpdate({ _id: req.body.id, isDeleted: false }, 
+    // .findByIdAndUpdate({ _id: req.body.id },
+      {
+        $set: {
+          isDeleted: true
+        }
+      }, null,
+      (err, event) => {
+        if (err) {
+          return res.send({
+            success: false,
+            message: "ERROR:  Unable to alter the requested record."
+          });
+        } 
+      }
+    )
+    .then(dbModel => res.json(dbModel))
+    .catch(err => res.status(422).json(err));
 
-  // removeEvent: (req, res) => {
-  //   const { query } = req;
-  //   const { eventID } = query;
 
-  //   Event.findOneAndUpdate({
-  //     _id: eventID,
-  //     isDeleted: false
-  //   }, {
-  //       $set: { isDeleted: true }
-  //     }, null, (err, sessions) => {
-  //       if (err) {
-  //         return res.send({
-  //           success: false,
-  //           message: "ERROR:  Unable to obtain the requested record."
-  //         });
-  //       };
+    // db.Event
+    //   .findById({ _id: req.params.id })
+    //   .then(dbModel => dbModel.remove())
+    //   .then(dbModel => res.json(dbModel))
+    //   .catch(err => res.status(422).json(err));
 
-  //       return res.send({
-  //         success: true,
-  //         message: "Successfully deleted."
-  //       });
-  //       // };
-  //     });
-  // },
+
+    // removeEvent: (req, res) => {
+    //   const { query } = req;
+    //   const { eventID } = query;
+
+    //   Event.findOneAndUpdate({
+    //     _id: eventID,
+    //     isDeleted: false
+    //   }, {
+    //       $set: { isDeleted: true }
+    //     }, null, (err, sessions) => {
+    //       if (err) {
+    //         return res.send({
+    //           success: false,
+    //           message: "ERROR:  Unable to obtain the requested record."
+    //         });
+    //       };
+
+    //       return res.send({
+    //         success: true,
+    //         message: "Successfully deleted."
+    //       });
+    //       // };
+    //     });
+    // },
 
   },
 

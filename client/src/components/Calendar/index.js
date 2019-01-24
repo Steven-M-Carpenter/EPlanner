@@ -4,9 +4,12 @@ import API from "../../utils/API";
 import BigCalendar from 'react-big-calendar'
 import 'react-big-calendar/lib/css/react-big-calendar.css'
 import moment from 'moment'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { DateTimePicker } from "@blueprintjs/datetime";
+import '@blueprintjs/datetime/lib/css/blueprint-datetime.css'
 // import events from './events'
 
-import { Button, Modal, ModalBody, ModalHeader, ModalFooter, Form, FormGroup, Input, Container, Label } from 'reactstrap';
+import { Button, Modal, ModalBody, ModalHeader, ModalFooter, Form, FormGroup, Input, Container, Row, Col, Label } from 'reactstrap';
 // import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import MainMenu from '../MainMenu';
 
@@ -48,22 +51,54 @@ class Calendar extends Component {
     API.loadEvents()
       .then(res => {
         console.log("RES: " + JSON.stringify(res));
+        console.log("EVENTS BEFORE: " + JSON.stringify(this.state.events));
 
-        // res.data.map(event => {
-        //   let v_isDeleted = (event.isDeleted);
-        //   let v_title = (event.title);
-        //   let v_start = (event.start.toDate());
-        //   let v_end = (event.end.toDate());
-        //   let v_id = (event._id);
+        res.data.map(event => {
+          let v_isDeleted = (event.isDeleted);
+          let v_title = (event.title);
+          let v_start = new Date(event.start);
+          // console.log("v_start: " + JSON.stringify(res));
+          let v_end = new Date(event.end);
+          let v_id = (event._id);
 
-        //   let events = [...this.state.events];
-        //   events.push({ isDeleted: v_isDeleted, title: v_title, start: v_start, end: v_end, id: v_id });
-        //   this.setState({ events });
+          let events = [...this.state.events];
+          events.push({ isDeleted: v_isDeleted, title: v_title, start: v_start, end: v_end, id: v_id });
+          this.setState({ events });
 
           // this.setState({ events: res.data, key: "", title: "", start: "", end: "", isDeleted: "" });
-          this.setState({ events: res.data });
-          console.log("EVENTS: " + JSON.stringify(this.state.events));
-        // })
+
+          // this.setState({ events: res.data });
+          console.log("EVENTS AFTER: " + JSON.stringify(this.state.events));
+        })
+      })
+      .catch(err => console.log(err));
+  };
+
+
+  reloadEvents = () => {
+    this.setState({ events: [] });
+    API.loadEvents()
+      .then(res => {
+        // console.log("RES: " + JSON.stringify(res));
+        console.log("EVENTS BEFORE: " + JSON.stringify(this.state.events));
+
+        res.data.map(event => {
+          let v_isDeleted = (event.isDeleted);
+          let v_title = (event.title);
+          let v_start = new Date(event.start);
+          // console.log("v_start: " + JSON.stringify(res));
+          let v_end = new Date(event.end);
+          let v_id = (event._id);
+
+          let events = [...this.state.events];
+          events.push({ isDeleted: v_isDeleted, title: v_title, start: v_start, end: v_end, id: v_id });
+          this.setState({ events });
+
+          // this.setState({ events: res.data, key: "", title: "", start: "", end: "", isDeleted: "" });
+
+          // this.setState({ events: res.data });
+          console.log("EVENTS AFTER: " + JSON.stringify(this.state.events));
+        })
       })
       .catch(err => console.log(err));
   };
@@ -73,38 +108,78 @@ class Calendar extends Component {
     this.setState({
       createEventModal: !this.state.createEventModal
     });
-  }
+  };
 
 
   eeModalToggle = () => {
     this.setState({
       editEventModal: !this.state.editEventModal
     });
-  }
+  };
 
 
   handleInputChange = event => {
     const value = event.target.value;
     const name = event.target.name;
+    const id = event.target.id;
     this.setState({
       [name]: value
     });
     console.log("name = " + name);
     console.log("value = " + value);
+    console.log("id = " + id);
   };
 
 
   handleEventSelect = event => {
     console.log("EVENT_SELECTED: " + JSON.stringify(event));
+    let theStart = new Date(event.start);
+    console.log("Start: " + theStart);
+    // this.setState({
+    //   tempEventTitle: event.title,
+    //   tempEventStart: event.start,
+    //   tempEventEnd: event.end,
+    //   editEventModal: !this.state.editEventModal
+    // });
     this.setState({
-      tempEventTitle: event.title,
-      tempEventStart: event.start,
-      tempEventEnd: event.end,
+      id: event.id,
+      title: event.title,
+      start: event.start,
+      end: event.end,
       editEventModal: !this.state.editEventModal
     });
   };
 
-  
+  handleDateChange = date => {
+    const newTitle = this.state.title;
+    const newStart = new Date(this.state.start).toISOString();
+    const newEnd = new Date(this.state.end).toISOString();
+
+    console.log("Returned Title = " + newTitle);
+    console.log("Returned SDate = " + newStart);
+    console.log("Returned EDate = " + newEnd);
+    console.log("Returned id = " + this.state.id);
+    const chgEvent = {
+      id: this.state.id,
+      title: newTitle,
+      start: newStart,
+      end: newEnd
+    };
+    API.chgEvent(chgEvent)
+      .then(res => {
+        console.log("API_RES: " + JSON.stringify(res));
+        this.eeModalToggle();
+        this.reloadEvents();
+      })
+      .catch(err => console.log(err));
+    // console.log(date);
+    // console.log("Stringified Date = " + JSON.stringify(date));
+    // API.loadEvents()
+    // .then(res => {
+    //   console.log("RES: " + JSON.stringify(res));
+    //   console.log("EVENTS BEFORE: " + JSON.stringify(this.state.events));
+  };
+
   handleNewEvent = event => {
     console.log("handling new event for you");
     if (this.state.title) {
@@ -118,7 +193,7 @@ class Calendar extends Component {
     this.setState({
       createEventModal: !this.state.createEventModal
     });
-        // this.setState({
+    // this.setState({
     //   events: [
     //     ...this.state.events,
     //     {
@@ -130,6 +205,20 @@ class Calendar extends Component {
     // })
   };
 
+  handleDeleteEvent = event => {
+    console.log("Delete Event Triggered");
+    console.log("Returned id = " + this.state.id);
+    const toDelete = {
+      id: this.state.id
+      };
+    API.deleteEvent(toDelete)
+      .then(res => {
+        console.log("API_RES: " + JSON.stringify(res));
+        this.eeModalToggle();
+        this.reloadEvents();
+      })
+      .catch(err => console.log(err));
+  };
 
   handleSelectSlot = ({ start, end }) => {
     let newDate = moment(start, 'ddd MMM DD YYYY HH mm ss ZZ').format('MM-DD-YY HH:mm:ss');
@@ -165,29 +254,19 @@ class Calendar extends Component {
   };
 
   createEvent = query => {
-    console.log("query = " + JSON.stringify(query));
+    // console.log("query = " + JSON.stringify(query));
     API.createEvent(query)
       .then(res => {
-        console.log("EVENT: res = " + JSON.stringify(res));
+        // console.log("EVENT: res = " + JSON.stringify(res));
         if (res.data.success) {
-          console.log("in success handle");
-          // window.location.assign('/login');
-          // this.setState({ loginStatus: true, });
-          // this.props.handleLoginStatus(this.state.loginStatus, this.state.loginEmail);
-          // this.setState({ isLoggedIn: true, });
-          // this.setState({ loginMsg: res.data.message });
+          // console.log("in success handle");
         } else {
-          console.log("in failure handle");
-          // window.location.assign('/signup');
-          // this.setState({ loginStatus: false });
-          // this.props.handleLoginStatus(this.state.loginStatus, this.state.loginEmail);
-          // this.setState({ isLoggedIn: false });
-          // this.setState({ loginMsg: res.data.message });
-        }
-        // console.log("LOGIN: state = " + JSON.stringify(this.state));
+          // console.log("in failure handle");
+        };
+        this.reloadEvents();
       })
       .catch(err => console.log(err));
-  }
+  };
 
   // <div className="newEvent_MHeader">Create Event</div>      toggle={this.modalToggle}
 
@@ -214,26 +293,49 @@ class Calendar extends Component {
         </Modal>
 
 
-        <Modal className="newEvent_Modal" isOpen={this.state.editEventModal} toggle={this.eeModalToggle}>
-          <ModalHeader className="newEvent_MHeader">Edit Event</ModalHeader>
+        <Modal className="editEvent_Modal modal-lg" isOpen={this.state.editEventModal} toggle={this.eeModalToggle}>
+          <Container>
+            <Row>
+              <Col className="col_Title pr-0" sm={{ size: 10 }}>
+                <ModalHeader className="editEvent_MHeader">Edit Event</ModalHeader>
+              </Col>
+              <Col className="col_Button text-right" sm={{ size: 2 }}>
+                <Button outline size="sm" className="delete_Event align-right mt-3" onClick={this.handleDeleteEvent} ><FontAwesomeIcon className="trash_Alt mt-0 mr-1" icon="trash-alt" size="sm"/>Delete</Button>
+              </Col>
+            </Row>
+          </Container>
           <ModalBody>
-            <Form className="newEvent_ModalForm">
-              <FormGroup className="mt-2">
-                <Label className="label_Text mb-0" for="event_Title">Event Title</Label>
-                <Input type="text" name="title" value={this.state.tempEventTitle} id="event_Title" placeholder="Add a Title" onChange={this.handleInputChange} />
-              </FormGroup>
-              <FormGroup className="mt-2">
-                <Label className="label_Text mb-0" for="event_Start">Event Start</Label>
-                <Input type="text" name="start" value={this.state.tempEventStart} id="event_Title" placeholder="Add a Title" onChange={this.handleInputChange} />
-              </FormGroup>
-              <FormGroup className="mt-2">
-                <Label className="label_Text mb-0" for="event_End">Event End</Label>
-                <Input type="text" name="end" value={this.state.tempEventEnd} id="event_Title" placeholder="Add a Title" onChange={this.handleInputChange} />
-              </FormGroup>
+            <Form className="editEvent_ModalForm">
+              <Container>
+                <Row>
+                  <Col className="col_Title" sm={{ size: 12 }}>
+                    <FormGroup className="mt-2">
+                      <Label className="label_Text mb-0" for={this.state.id}>Event Title</Label>
+                      <Input type="text" name="title" value={this.state.title} id={this.state.id} placeholder="Add a Title" onChange={this.handleInputChange} />
+                    </FormGroup>
+                  </Col>
+                </Row>
+                <Row>
+                  <Col className="col_Start" sm={{ size:6 }}>
+                    <FormGroup className="mt-2">
+                      <Label className="label_Text mb-0" for={this.state.id}>Event Start</Label>
+                      <Input type="text" name="start" value={this.state.start} id={this.state.id} data-rec={this.state.id} placeholder="Add a Title" onChange={this.handleInputChange} />
+                      {/* <DateTimePicker id="event_Start" name="start" value={this.state.date} onChange={this.handleInputChange} /> */}
+                    </FormGroup>
+                  </Col>
+                  <Col className="col_Start" sm={{ size: 6 }}>
+                    <FormGroup className="mt-2">
+                      <Label className="label_Text mb-0" for={this.state.id}>Event End</Label>
+                      {/* <Input type="text" name="end" value={this.state.end} id={this.state.id} data-rec={this.state.id} placeholder="Add a Title" onChange={this.handleInputChange} /> */}
+                      <DateTimePicker id="event_End" name="end" value={this.state.date} onChange={this.handleInputChange} />
+                    </FormGroup>
+                  </Col>
+                </Row>
+              </Container>
             </Form>
           </ModalBody>
           <ModalFooter className="text-center">
-            <Button className="process_Button mt-0 mb-0" onClick={this.handleNewEvent} >Save</Button>
+            <Button className="process_Button mt-0 mb-0" onClick={this.handleDateChange} >Save</Button>
             <Button className="process_Button mt-0 mb-0" onClick={this.eeModalToggle} >Cancel</Button>
           </ModalFooter>
         </Modal>
