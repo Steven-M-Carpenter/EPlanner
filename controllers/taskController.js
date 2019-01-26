@@ -1,5 +1,6 @@
 const db = require("../models");
-const Card = require("../models/Card")
+const Card = require("../models/Card");
+const ColName = require("../models/Column");
 
 // Defining methods for the taskController
 module.exports = {
@@ -89,6 +90,18 @@ module.exports = {
   },
 
 
+  //************************************************************/
+  //* Load all cards
+  //************************************************************/
+  listCols: (req, res) => {
+    db.Column
+      .find({ isDeleted: false })
+      .sort({ dispOrder: 1 })
+      .then(dbModel => res.json(dbModel))
+      .catch(err => res.status(422).json(err));
+  },
+
+  
   //************************************************************/
   //* Modify events as directed
   //************************************************************/

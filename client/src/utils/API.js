@@ -34,7 +34,16 @@ export default {
   createCard: (query) => {
     return axios.post("/api/addCard", query);
   },
-
+  createColumn: (query) => {
+    return axios.post("/api/addCol", query);
+  },
+  getCols: () => {
+    return axios.get("/getCols");
+  },
+  getCards: (column) => {
+    return axios.get("/getCards/" + column);
+  },
+  
   // Deletes a book from the database
   deleteBook: function(id) {
     console.log("Delete of ID requested: " + id);

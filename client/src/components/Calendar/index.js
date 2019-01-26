@@ -5,8 +5,12 @@ import BigCalendar from 'react-big-calendar'
 import 'react-big-calendar/lib/css/react-big-calendar.css'
 import moment from 'moment'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { DateTimePicker } from "@blueprintjs/datetime";
+// import { DateTimeInput, TimePicker } from '@opuscapita/react-datetime';
+import { DatePicker } from "@blueprintjs/datetime";
 import '@blueprintjs/datetime/lib/css/blueprint-datetime.css'
+// import DateTimePicker from 'react-date-and-time-picker';
+// import 'react-date-and-time-picker/dist/main.css';
+// import '@blueprintjs/datetime/lib/css/blueprint-datetime.css'
 // import events from './events'
 
 import { Button, Modal, ModalBody, ModalHeader, ModalFooter, Form, FormGroup, Input, Container, Row, Col, Label } from 'reactstrap';
@@ -210,7 +214,7 @@ class Calendar extends Component {
     console.log("Returned id = " + this.state.id);
     const toDelete = {
       id: this.state.id
-      };
+    };
     API.deleteEvent(toDelete)
       .then(res => {
         console.log("API_RES: " + JSON.stringify(res));
@@ -300,7 +304,7 @@ class Calendar extends Component {
                 <ModalHeader className="editEvent_MHeader">Edit Event</ModalHeader>
               </Col>
               <Col className="col_Button text-right" sm={{ size: 2 }}>
-                <Button outline size="sm" className="delete_Event align-right mt-3" onClick={this.handleDeleteEvent} ><FontAwesomeIcon className="trash_Alt mt-0 mr-1" icon="trash-alt" size="sm"/>Delete</Button>
+                <Button outline size="sm" className="delete_Event align-right mt-3" onClick={this.handleDeleteEvent} ><FontAwesomeIcon className="trash_Alt mt-0 mr-1" icon="trash-alt" size="sm" />Delete</Button>
               </Col>
             </Row>
           </Container>
@@ -316,18 +320,36 @@ class Calendar extends Component {
                   </Col>
                 </Row>
                 <Row>
-                  <Col className="col_Start" sm={{ size:6 }}>
+                  <Col className="col_Start" sm={{ size: 5 }}>
                     <FormGroup className="mt-2">
                       <Label className="label_Text mb-0" for={this.state.id}>Event Start</Label>
-                      <Input type="text" name="start" value={this.state.start} id={this.state.id} data-rec={this.state.id} placeholder="Add a Title" onChange={this.handleInputChange} />
-                      {/* <DateTimePicker id="event_Start" name="start" value={this.state.date} onChange={this.handleInputChange} /> */}
+                      {/* <Input type="text" name="start" value={this.state.start} id={this.state.id} data-rec={this.state.id} placeholder="Add a Title" onChange={this.handleInputChange} /> */}
+                      <DatePicker id="event_Start" name="start" timePrecision="minute" value={this.state.date} onChange={this.handleInputChange} />
+                      {/* <DateTimeInput
+                        value={this.state.start}
+                        onChange={this.handleDateChange}
+                      />
+                      <TimePicker
+                        time={this.state.time}
+                        onChange={this.handleDateChange}
+                        minutesInterval={15}
+                      /> */}
                     </FormGroup>
                   </Col>
-                  <Col className="col_Start" sm={{ size: 6 }}>
+                  <Col className="col_Start" sm={{ size: 5, offset: 1 }}>
                     <FormGroup className="mt-2">
                       <Label className="label_Text mb-0" for={this.state.id}>Event End</Label>
                       {/* <Input type="text" name="end" value={this.state.end} id={this.state.id} data-rec={this.state.id} placeholder="Add a Title" onChange={this.handleInputChange} /> */}
-                      <DateTimePicker id="event_End" name="end" value={this.state.date} onChange={this.handleInputChange} />
+                      <DatePicker id="event_End" name="end" useAmPm="true" timePrecision="minute" value={this.state.date} onChange={this.handleInputChange} />
+                      {/* <DateTimeInput
+                        value={this.state.dateTime}
+                        onChange={this.handleDateChange}
+                      />
+                      <TimePicker
+                        time={this.state.time}
+                        onChange={this.handleDateChange}
+                        minutesInterval={15}
+                      /> */}
                     </FormGroup>
                   </Col>
                 </Row>

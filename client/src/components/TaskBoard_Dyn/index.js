@@ -6,13 +6,9 @@ import { Button, Modal, ModalBody, ModalHeader, ModalFooter, Form, FormGroup, In
 // import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { DatePicker } from "@blueprintjs/datetime";
 import '@blueprintjs/datetime/lib/css/blueprint-datetime.css'
-import TaskCard from "../TaskCard";
+// import TaskCard from "../TaskCard";
+import TaskCol1 from "../TaskCol1";
 import MainMenu from '../MainMenu';
-import TB_Groom from '../TB_Groom';
-import TB_ToDo from '../TB_ToDo';
-import TB_Doing from '../TB_Doing';
-import TB_Done from '../TB_Done';
-
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 //******************************************************************************************/
@@ -24,128 +20,58 @@ class TaskBoard extends Component {
     activeItem: 'Taskboard',
     createCardModal: false,
     tgt_column: "",
-    columnHeads: ["Grooming", "To-Do", "Doing", "Done"],
-    cardsGrooming: [],
-    cardsToDo: [],
-    cardsDoing: [],
-    cardsDone: [],
+    columnHeads: [],
+    cardData: [],
     steprows: [{}]
   };
 
   componentDidMount = () => {
     let readToken = window.localStorage.getItem("SMC_authkey");
-    // console.log("Token Read = " + readToken);
+    console.log("Token Read = " + readToken);
     let query = {
       token: readToken
     };
     API.checkAuth(query)
       .then(res => {
         if (res.data.success) {
-          // console.log("in success handle");
+          console.log("in success handle");
           this.setState({ isLoggedIn: true, });
           // window.location.assign('/auth/main');
         } else {
-          // console.log("in failure handle");
+          console.log("in failure handle");
           this.setState({ isLoggedIn: false });
           window.location.assign('/login');
-          // console.log("ERROR:  Would redirect to login.")
+          console.log("ERROR:  Would redirect to login.")
         };
       })
       .catch(err => console.log(err));
 
 
-    API.getCards("Grooming")
+      API.getCols()
       .then(res => {
-        // console.log("RES: " + JSON.stringify(res));
-        // console.log("Grooming BEFORE: " + JSON.stringify(this.state.cardsGrooming));
-        res.data.map(column => {
-          let v_title = (column.title);
-          let v_desc = (column.desc);
-          let v_start = (column.start);
-          let v_end = (column.end);
-          let v_columnAssigned = (column.column);
-          let v_isDeleted = (column.isDeleted);
-          let v_isClosed = (column.isClosed);
-          let v_isArchived = (column.isArchived);
+        console.log("RES: " + JSON.stringify(res));
+        console.log("COLUMNS BEFORE: " + JSON.stringify(this.state.columnHeads));
 
-          let cardsGrooming = [...this.state.cardsGrooming];
-          cardsGrooming.push({ isDeleted: v_isDeleted, isClosed: v_isClosed, isArchived: v_isArchived, column: v_columnAssigned, end: v_end, start: v_start, desc: v_desc, title: v_title });
-          this.setState({ cardsGrooming });
-          // console.log("Grooming AFTER: " + JSON.stringify(this.state.cardsGrooming));
+        res.data.map(column => {
+          let v_isDeleted = (column.isDeleted);
+          let v_columnName = (column.columnName);
+          let v_dispOrder = (column.dispOrder);
+          let v_id = (column._id);
+
+          let columnHeads = [...this.state.columnHeads];
+          columnHeads.push({ isDeleted: v_isDeleted, columnName: v_columnName, dispOrder: v_dispOrder, id: v_id });
+          this.setState({ columnHeads });
+
+          // this.setState({ events: res.data, key: "", title: "", start: "", end: "", isDeleted: "" });
+
+          // this.setState({ events: res.data });
+          console.log("COLUMNS AFTER: " + JSON.stringify(this.state.columnHeads));
         })
       })
       .catch(err => console.log(err));
-
-
-      // API.getCards("Doing")
-      // .then(res => {
-      //   console.log("RES: " + JSON.stringify(res));
-      //   console.log("Doing BEFORE: " + JSON.stringify(this.state.cardsDoing));
-      //   res.data.map(column => {
-      //     let v_title = (column.title);
-      //     let v_desc = (column.desc);
-      //     let v_start = (column.start);
-      //     let v_end = (column.end);
-      //     let v_columnAssigned = (column.column);
-      //     let v_isDeleted = (column.isDeleted);
-      //     let v_isClosed = (column.isClosed);
-      //     let v_isArchived = (column.isArchived);
-
-      //     let cardsDoing = [...this.state.cardsDoing];
-      //     cardsDoing.push({ isDeleted: v_isDeleted, isClosed: v_isClosed, isArchived: v_isArchived, column: v_columnAssigned, end: v_end, start: v_start, desc: v_desc, title: v_title });
-      //     this.setState({ cardsDoing });
-      //     console.log("Doing AFTER: " + JSON.stringify(this.state.cardsDoing));
-      //   })
-      // })
-      // .catch(err => console.log(err));
-
-
-      // API.getCards("To-Do")
-      // .then(res => {
-      //   console.log("RES: " + JSON.stringify(res));
-      //   console.log("To-Do BEFORE: " + JSON.stringify(this.state.cardsToDo));
-      //   res.data.map(column => {
-      //     let v_title = (column.title);
-      //     let v_desc = (column.desc);
-      //     let v_start = (column.start);
-      //     let v_end = (column.end);
-      //     let v_columnAssigned = (column.column);
-      //     let v_isDeleted = (column.isDeleted);
-      //     let v_isClosed = (column.isClosed);
-      //     let v_isArchived = (column.isArchived);
-
-      //     let cardsToDo = [...this.state.cardsToDo];
-      //     cardsToDo.push({ isDeleted: v_isDeleted, isClosed: v_isClosed, isArchived: v_isArchived, column: v_columnAssigned, end: v_end, start: v_start, desc: v_desc, title: v_title });
-      //     this.setState({ cardsToDo });
-      //     console.log("To-Do AFTER: " + JSON.stringify(this.state.cardsToDo));
-      //   })
-      // })
-      // .catch(err => console.log(err));
-
-
-      // API.getCards("Done")
-      // .then(res => {
-      //   console.log("RES: " + JSON.stringify(res));
-      //   console.log("Done BEFORE: " + JSON.stringify(this.state.cardsDone));
-      //   res.data.map(column => {
-      //     let v_title = (column.title);
-      //     let v_desc = (column.desc);
-      //     let v_start = (column.start);
-      //     let v_end = (column.end);
-      //     let v_columnAssigned = (column.column);
-      //     let v_isDeleted = (column.isDeleted);
-      //     let v_isClosed = (column.isClosed);
-      //     let v_isArchived = (column.isArchived);
-
-      //     let cardsDone = [...this.state.cardsDone];
-      //     cardsDone.push({ isDeleted: v_isDeleted, isClosed: v_isClosed, isArchived: v_isArchived, column: v_columnAssigned, end: v_end, start: v_start, desc: v_desc, title: v_title });
-      //     this.setState({ cardsDone });
-      //     console.log("Done AFTER: " + JSON.stringify(this.state.cardsDone));
-      //   })
-      // })
-      // .catch(err => console.log(err));
-
   };
+
+  
 
 
   handleRowChange = idx => event => {
@@ -209,16 +135,16 @@ class TaskBoard extends Component {
   };
 
 
-  //*************************************/
-  // Date Change
-  //*************************************/
+//*************************************/
+// Date Change
+//*************************************/
   handleStartDateChange = () => {
     console.log("in START date change");
   };
 
-  //*************************************/
-  // Date Change
-  //*************************************/
+//*************************************/
+// Date Change
+//*************************************/
   handleEndDateChange = () => {
     console.log("in END date change");
   };
@@ -274,7 +200,6 @@ class TaskBoard extends Component {
     steprows.splice(idx, 1)
     this.setState({ steprows })
   };
-
 
   handleNewCard = () => {
     console.log("Creating new card");
@@ -384,94 +309,25 @@ class TaskBoard extends Component {
         <Container fluid className="mt-5">
           <Row className="mx-2">
             <Col className="lane_Title text-right" sm="1">Activities</Col>
-            <Col className="col_Box px-3 pb-4 mx-1" sm="2">
 
-
-            <TB_Groom
-              cardsGrooming = {this.state.cardsGrooming}
-              // key={id}
-              // title={title}
-              // desc={desc}
-              // start={start}
-              // end={end}
-              // isDeleted={isDeleted}
-              // isClosed={isClosed}
-              // isArchived={isArchived}
-            />
+            <Col className="end_Box px-3 pb-4 mx-1 text-center align-middle" sm="1" >
+              <FontAwesomeIcon className="left-pan sticky-top mt-0 mr-1" icon="chevron-left" size="2x" onClick={this.handleScrollLeft} />
             </Col>
 
-            {/* {this.state.cardsToDo.map(card => {
-                let id = (card.id);
-                let title = (card.title);
-                let desc = (card.desc);
-                let start = (card.start);
-                let end = (card.end);
-                let isDeleted = (card.isDeleted);
-                let isClosed = (card.isClosed);
-                let isArchived = (card.isArchived);
-                return (
-            <TB_ToDo
+            {this.state.columnHeads.map(column => {
+            let id = (column._id);
+            let columnName = (column.columnName);
+            return (
+            <div>
+              <TaskCol1
               key={id}
-              title={title}
-              desc={desc}
-              start={start}
-              end={end}
-              isDeleted={isDeleted}
-              isClosed={isClosed}
-              isArchived={isArchived}
-            />
-              );
-            })}
+              columnName={columnName} 
+              />
+            </div>
 
 
-            {this.state.cardsDoing.map(card => {
-                let id = (card.id);
-                let title = (card.title);
-                let desc = (card.desc);
-                let start = (card.start);
-                let end = (card.end);
-                let isDeleted = (card.isDeleted);
-                let isClosed = (card.isClosed);
-                let isArchived = (card.isArchived);
-                return (
-            <TB_Doing
-              key={id}
-              title={title}
-              desc={desc}
-              start={start}
-              end={end}
-              isDeleted={isDeleted}
-              isClosed={isClosed}
-              isArchived={isArchived}
-            />
-              );
-            })}
 
-
-            {this.state.cardsDone.map(card => {
-                let id = (card.id);
-                let title = (card.title);
-                let desc = (card.desc);
-                let start = (card.start);
-                let end = (card.end);
-                let isDeleted = (card.isDeleted);
-                let isClosed = (card.isClosed);
-                let isArchived = (card.isArchived);
-                return (
-            <TB_Done
-              key={id}
-              title={title}
-              desc={desc}
-              start={start}
-              end={end}
-              isDeleted={isDeleted}
-              isClosed={isClosed}
-              isArchived={isArchived}
-            />
-              );
-            })} */}
-
-
+            <Col className="end_Box px-3 pb-4 mx-1 text-center align-middle" sm="1" ><FontAwesomeIcon className="right-pan sticky-top mt-0 mr-1" icon="chevron-right" size="2x" /></Col>
           </Row>
         </Container>
 

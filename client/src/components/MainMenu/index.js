@@ -43,9 +43,9 @@ class MainMenu extends Component {
           {/* <NavbarToggler onClick={this.toggle} />
           <Collapse isOpen={this.state.isOpen} navbar> */}
             <Nav className="mr-auto" navbar>
-              <NavItem>
+              {/* <NavItem>
                 <NavLink className="nav_Option mx-5" href="/auth/dashboard" >Dashboard</NavLink>
-              </NavItem>
+              </NavItem> */}
               <NavItem>
                 <NavLink className="nav_Option mx-5"  href="/auth/taskboard" >Task Board</NavLink>
               </NavItem>
