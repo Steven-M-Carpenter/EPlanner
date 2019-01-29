@@ -623,6 +623,7 @@ class TaskBoard extends Component {
     const columnName = event.target.id;
     // const columnName = event.target.getAttribute('data-column');
     // const columnName = event.target.attributes.getNamedItem('data-column').value;
+    this.setState({steprows: []});
     console.log("COLUMN NAME: = " + columnName);
     this.setState({
       tgt_column: columnName,
