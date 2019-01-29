@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Redirect, Switch } from "react-router-dom";
 import { library } from '@fortawesome/fontawesome-svg-core'
 // import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faCogs, faPlusCircle, faUser, faArrowCircleLeft, faArrowCircleRight, faTrashAlt, faChevronRight, faChevronLeft, faTimesCircle } from '@fortawesome/free-solid-svg-icons'
+import { faCogs, faPlusCircle, faUser, faArrowCircleLeft, faArrowCircleRight, faTrashAlt, faChevronRight, faChevronLeft, faTimesCircle, faDoorClosed } from '@fortawesome/free-solid-svg-icons'
 
 import './App.css';
 //import { Button, Header, Grid, Icon, Image, Label, Menu, Segment, Sidebar, Container } from 'semantic-ui-react';
@@ -23,7 +23,7 @@ import Calendar from './components/Calendar';
 
 
 
-library.add(faCogs, faPlusCircle, faUser, faArrowCircleLeft, faArrowCircleRight, faTrashAlt, faChevronRight, faChevronLeft, faTimesCircle)
+library.add(faCogs, faPlusCircle, faUser, faArrowCircleLeft, faArrowCircleRight, faTrashAlt, faChevronRight, faChevronLeft, faTimesCircle, faDoorClosed )
 
 class App extends Component {
   state = {

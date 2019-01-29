@@ -7,7 +7,7 @@ const CardSchema = new Schema({
   desc: { type: String },
   start: { type: String, required: true },
   end: { type: String, required: true },
-  steps: { type: [Array] },
+  steps: { type: [Array], default: [] },
   lane: { type: String, default: -1, required: true },
   column: { type: String, default: -1, required: true },
   isDeleted:  { type: Boolean, default: false },

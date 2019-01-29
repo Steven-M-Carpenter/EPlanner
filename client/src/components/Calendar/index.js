@@ -323,8 +323,8 @@ class Calendar extends Component {
                   <Col className="col_Start" sm={{ size: 5 }}>
                     <FormGroup className="mt-2">
                       <Label className="label_Text mb-0" for={this.state.id}>Event Start</Label>
-                      {/* <Input type="text" name="start" value={this.state.start} id={this.state.id} data-rec={this.state.id} placeholder="Add a Title" onChange={this.handleInputChange} /> */}
-                      <DatePicker id="event_Start" name="start" timePrecision="minute" value={this.state.date} onChange={this.handleInputChange} />
+                      <Input type="text" name="start" value={this.state.start} id={this.state.id} data-rec={this.state.id} placeholder="Add a Title" onChange={this.handleInputChange} />
+                      {/* <DatePicker id="event_Start" name="start" timePrecision="minute" value={this.state.date} onChange={this.handleInputChange} /> */}
                       {/* <DateTimeInput
                         value={this.state.start}
                         onChange={this.handleDateChange}
@@ -339,8 +339,8 @@ class Calendar extends Component {
                   <Col className="col_Start" sm={{ size: 5, offset: 1 }}>
                     <FormGroup className="mt-2">
                       <Label className="label_Text mb-0" for={this.state.id}>Event End</Label>
-                      {/* <Input type="text" name="end" value={this.state.end} id={this.state.id} data-rec={this.state.id} placeholder="Add a Title" onChange={this.handleInputChange} /> */}
-                      <DatePicker id="event_End" name="end" useAmPm="true" timePrecision="minute" value={this.state.date} onChange={this.handleInputChange} />
+                      <Input type="text" name="end" value={this.state.end} id={this.state.id} data-rec={this.state.id} placeholder="Add a Title" onChange={this.handleInputChange} />
+                      {/* <DatePicker id="event_End" name="end" useAmPm="true" timePrecision="minute" value={this.state.date} onChange={this.handleInputChange} /> */}
                       {/* <DateTimeInput
                         value={this.state.dateTime}
                         onChange={this.handleDateChange}
@@ -364,7 +364,7 @@ class Calendar extends Component {
 
 
         <Container>
-          <div className="bc_Block mt-4">
+          <div className="bc_Block mt-4 mb-4">
             {/* <Basic className="big_Cal_Comp"/> */}
             <BigCalendar className="big_Cal_Comp"
               selectable

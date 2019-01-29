@@ -40,10 +40,23 @@ export default {
   getCols: () => {
     return axios.get("/getCols");
   },
-  getCards: (column) => {
-    return axios.get("/getCards/" + column);
+  loadCards: (column) => {
+    return axios.get("/loadCards/" + column);
   },
-  
+  getCard: (id) => {
+    return axios.get("/getCard/" + id);
+  },
+  moveCard: (query) => {
+    return axios.post("/api/moveCard", query);
+  },
+  editCard: (query) => {
+    return axios.post("/api/editCard", query);
+  },
+  closeCard: (query) => {
+    return axios.post("/api/closeCard", query);
+  },
+
+
   // Deletes a book from the database
   deleteBook: function(id) {
     console.log("Delete of ID requested: " + id);

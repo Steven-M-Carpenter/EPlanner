@@ -128,10 +128,9 @@ module.exports = {
   //************************************************************/
   //* Load all cards
   //************************************************************/
-  loadCards: (req, res) => {
+  getCard: (req, res) => {
     db.Card
-      .find({ isDeleted: false, column: req.params.column })
-      .sort({ start: 1 })
+      .find({ _id: req.params.id })
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
   },
@@ -140,10 +139,107 @@ module.exports = {
   //************************************************************/
   //* Load all cards
   //************************************************************/
+  loadCards: (req, res) => {
+    db.Card
+      .find({ isDeleted: false, isClosed: false, isArchived: false, column: req.params.column })
+      .sort({ start: 1 })
+      .then(dbModel => res.json(dbModel))
+      .catch(err => res.status(422).json(err));
+  },
+
+
+  //************************************************************/
+  //* Load all Columns
+  //************************************************************/
   listCols: (req, res) => {
     db.Column
       .find({ isDeleted: false })
       .sort({ dispOrder: 1 })
+      .then(dbModel => res.json(dbModel))
+      .catch(err => res.status(422).json(err));
+  },
+
+
+  //************************************************************/
+  //* Move a card between columns
+  //************************************************************/
+  advanceCard: (req, res) => {
+    // console.log("Request Body = " + JSON.stringify(req.body));
+    db.Card
+      .findOneAndUpdate({ _id: req.body.id },
+        { $set: { column: req.body.newColumn } },
+        null,
+        (err, event) => {
+          if (err) {
+            return res.send({
+              success: false,
+              message: "ERROR:  Unable to alter the requested record."
+            });
+          };
+        }
+      )
+      .then(dbModel => res.json(dbModel))
+      .catch(err => res.status(422).json(err));
+  },
+
+
+
+  editCard: (req, res) => {
+    console.log("Request Body = " + JSON.stringify(req.body));
+    db.Card
+      .findOneAndUpdate({ _id: req.body.id },
+        { $set: {
+          title: req.body.title,
+          desc: req.body.desc,
+          start: req.body.start,
+          end: req.body.end,
+          column: req.body.column,
+          isDeleted: req.body.isDeleted,
+          isClosed: req.body.isClosed,
+          isArchived:req.body.isArchived,
+          steps: req.body.steps 
+        } },null,
+        (err, event) => {
+          if (err) {
+            return res.send({
+              success: false,
+              message: "ERROR:  Unable to alter the requested record."
+            });
+          };
+        }
+      )
+      .then(dbModel => res.json(dbModel))
+      .catch(err => res.status(422).json(err));
+  },
+
+
+  closeCard: (req, res) => {
+    console.log("Request Body = " + JSON.stringify(req.body));
+    db.Card
+      .findOneAndUpdate({ _id: req.body.id },
+        { $set: {
+          isClosed: req.body.isClosed
+        } },null,
+        (err, event) => {
+          if (err) {
+            return res.send({
+              success: false,
+              message: "ERROR:  Unable to alter the requested record."
+            });
+          };
+        }
+      )
+      .then(dbModel => res.json(dbModel))
+      .catch(err => res.status(422).json(err));
+  },
+
+
+  //************************************************************/
+  //* remove all steps from cards before add
+  //************************************************************/
+  Steps: (req, res) => {
+    db.Card
+      .child.remove()
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
   },

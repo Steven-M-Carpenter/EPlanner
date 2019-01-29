@@ -31,6 +31,10 @@
   color: #0000b3;
 }
 
+.editCard_MHeader {
+  color: #0000b3;
+}
+
 .table_Header {
   color: #0000b3;
 }
@@ -43,7 +47,14 @@
   background-color: #0000b3 !important;
 }
 
+.add_EventBtn {
+  background-color: #0000b3 !important;
+}
 
+.close_Card {
+  background-color: #0000b3 !important;
+  color: white !important;
+}
 
 #table_Index {
   color: #0000b3;

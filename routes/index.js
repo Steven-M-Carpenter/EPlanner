@@ -78,13 +78,37 @@ router
 .get(cardController.listCols);
 
 
-// Matches with "/getCols"
+// Matches with "/loadCards"
 router
-.route("/getCards/:column")
+.route("/loadCards/:column")
 .get(cardController.loadCards);
 
 
-  // If no API routes are hit, send the React app
+// Matches with "/getCard/:id"
+router
+.route("/getCard/:id")
+.get(cardController.getCard);
+
+
+// Matches with "/api/moveCard"
+router
+.route("/api/moveCard")
+.post(cardController.advanceCard);
+
+
+// Matches with "/api/editCard"
+router
+.route("/api/editCard")
+.post(cardController.editCard);
+
+
+// Matches with "/api/editCard"
+router
+.route("/api/closeCard")
+.post(cardController.closeCard);
+
+
+// If no API routes are hit, send the React app
 router.use(function (req, res) {
   res.sendFile(path.join(__dirname, "../client/build/index.html"));
 });

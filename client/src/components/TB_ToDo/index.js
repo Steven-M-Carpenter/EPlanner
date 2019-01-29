@@ -10,24 +10,59 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 //
 //******************************************************************************************/
 
-const TB_ToDo = ({ children }) => {
+const TB_ToDo = (props) => {
   return (
 
-    <div className="taskboard_ToDo">
 
-      <Col className="col_Box px-3 pb-4 mx-1" sm="2">
+    <span className="taskboard_ToDo">
+      {/* <Col className="col_Box px-3 pb-4 mx-1" sm="2"> */}
         <Row><Col className="text-right pr-0" sm={{ size: 12 }}>
-          {/* <Button className="addCard_Button mt-1 mb-0 pt-0 pb-0" color="white" size="sm" data-column="To-Do" onClick={this.handleCardCreate} >
-            <FontAwesomeIcon className="add_CardIcon mt-1 mb-1" icon="plus-circle" size="lg" data-column="To-Do" />
-          </Button> */}
+          {/* <Button className="addCard_Button mt-1 mb-0 pt-0 pb-0" color="white" size="sm" data-column="To-Do" id="To-Do" onClick={props.handleCardCreate} > */}
+            <FontAwesomeIcon className="add_CardIcon mt-1 mb-1 mr-1" icon="plus-circle" size="lg" id="To-Do" data-column="To-Do" onClick={props.handleCardCreate}/>
+          {/* </Button> */}
         </Col></Row>
-        <Row><Col className="col_Lane text-center  mt-0" sm={{ size: 10, offset: 1 }}>To-Do</Col></Row>
+        <Row><Col className="col_Lane text-center  mt-0" sm={{ size: 10, offset: 1 }}>Planning</Col></Row>
         <Row><Col sm={{ size: 12 }}>
-          {children}
-        </Col></Row>
-      </Col>
 
-    </div >
+        {/* {console.log("props: " + JSON.stringify(props.cardsToDo))} */}
+        {props.cardsToDo.map(card => {
+          let theKey = (card.id);
+          let theId = (card.id);
+          let theTitle = (card.title);
+          let theDesc = (card.desc);
+          let theStart = (card.start);
+          let theEnd = (card.end);
+          let theLane = (card.lane);
+          let theColumn = (card.column);
+          let theIsDeleted = (card.isDeleted);
+          let theIsClosed = (card.isClosed);
+          let theIsArchived = (card.isArchived);
+          let theIdCol = theId + "_" + theColumn;
+          // console.log("X = " + desc +  " " + "Y = " + start);
+          return (
+            <TaskCard
+              A_key={theKey}
+              A_id={theId}
+              A_idCol={theIdCol}
+              A_title={theTitle}
+              A_desc={theDesc}
+              A_start={theStart}
+              A_end={theEnd}
+              A_lane={theLane}
+              A_column={theColumn}
+              A_isDeleted={theIsDeleted}
+              A_isClosed={theIsClosed}
+              A_isArchived={theIsArchived}
+              handleShiftLeft={props.handleShiftLeft}
+              handleShiftRight={props.handleShiftRight}
+              handleCardEditRequest={props.handleCardEditRequest}
+            />);
+        })}
+
+
+        </Col></Row>
+        </span >
+
   );
 };
 
