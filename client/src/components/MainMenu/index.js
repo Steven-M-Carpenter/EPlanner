@@ -14,7 +14,7 @@ class MainMenu extends Component {
 
 
   componentDidMount() {
-    let readToken = window.localStorage.getItem("SMC_authkey");
+    let readToken = window.sessionStorage.getItem("SMC_authkey");
     let query = {
       token: readToken
     };

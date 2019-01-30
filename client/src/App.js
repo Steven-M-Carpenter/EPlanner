@@ -66,12 +66,12 @@ class App extends Component {
             <Route exact path="/logout" component={Logout} />
             <Route exact path="/main" render={() => (
               this.state.isLoggedIn ? (
-                <Redirect to="/auth/main" />
+                <Redirect to="/auth/taskboard" />
               ) : (
                   <Login handleLoginStatus={this.handleLoginStatus} />
               ))} />
 
-            <Route exact path="/auth/main" component={AppMain} />
+            {/* <Route exact path="/auth/taskboard" component={TaskBoard} /> */}
             {/* <Route exact path="/auth/dashboard" component={DashBoard} /> */}
             <Route exact path="/auth/taskboard" component={TaskBoard} />
             <Route exact path="/auth/calendar" component={Calendar} />

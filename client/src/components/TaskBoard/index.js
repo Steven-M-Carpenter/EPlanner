@@ -37,7 +37,7 @@ class TaskBoard extends Component {
   };
 
   componentDidMount = () => {
-    let readToken = window.localStorage.getItem("SMC_authkey");
+    let readToken = window.sessionStorage.getItem("SMC_authkey");
     // console.log("Token Read = " + readToken);
     let query = {
       token: readToken
@@ -417,6 +417,9 @@ class TaskBoard extends Component {
         };
         this.ecModalToggle();
         this.loadGroomRows();
+        this.loadToDoRows();
+        this.loadDoingRows();
+        this.loadDoneRows();
       })
       .catch(err => console.log(err));
 

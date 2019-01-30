@@ -38,13 +38,13 @@ class Login extends Component {
           console.log("in success handle");
           this.setState({ isLoggedIn: true, });
           this.setState({ loginMsg: res.data.message });
-          window.localStorage.setItem("SMC_authkey", res.data.token);
+          window.sessionStorage.setItem("SMC_authkey", res.data.token);
           window.location.assign('/authenticated/main');
         } else {
           console.log("in failure handle");
           this.setState({ isLoggedIn: false });
           this.setState({ loginMsg: res.data.message });
-          window.localStorage.setItem("SMC_authkey", "");
+          window.sessionStorage.setItem("SMC_authkey", "");
           window.location.assign('/login');
         }
         console.log("LOGIN: state = " + JSON.stringify(this.state));

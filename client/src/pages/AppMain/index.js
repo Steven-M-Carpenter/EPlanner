@@ -45,7 +45,7 @@ class AppMain extends Component {
 
 
   componentDidMount() {
-    let readToken = window.localStorage.getItem("SMC_authkey");
+    let readToken = window.sessionStorage.getItem("SMC_authkey");
     console.log("Token Read = " + readToken);
     let query = {
       token: readToken
