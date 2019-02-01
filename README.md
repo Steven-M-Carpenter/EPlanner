@@ -14,18 +14,18 @@ Key fatures of this application include:
 There are no client side requirements beyond a modern browser.
 
 ## Application Usage
-Launch the application using the link below
-You will be presented with the option to login or create a new account
-After logging in, navigate to the Taskboard or Calendar using the Navbar
+* Launch the application using the link below
+* You will be presented with the option to login or create a new account
+* After logging in, navigate to the Taskboard or Calendar using the Navbar
 
 ### On the Taskboard
-Click the plus at the top-right of each lane to add new cards
-Select the card header to edit the card details
-Click the left or right arrorws to move cards between lanes
-Close a card by selecting the "Mark Closed" button
+* Click the plus at the top-right of each lane to add new cards
+* Select the card header to edit the card details
+* Click the left or right arrorws to move cards between lanes
+* Close a card by selecting the "Mark Closed" button
 
 ### On the Calendar
-Navigate between views using the buttons at the top
-Click an existing event to alter the contents
-Drag over a time range to set an event in that window
-Select an event to access the "Delete" button
+* Navigate between views using the buttons at the top
+* Click an existing event to alter the contents
+* Drag over a time range to set an event in that window
+* Select an event to access the "Delete" button
